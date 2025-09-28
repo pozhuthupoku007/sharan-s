@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sharan's International Company — Global Solutions</title>
+  <meta name="description" content="Sharan's International Company delivers global solutions in consulting, logistics, and technology. Agile. Reliable. Trusted worldwide." />
+  <meta name="theme-color" content="#2d6ae3" />
+
+  <!-- Open Graph / SEO (customize URLs and image) -->
+  <meta property="og:title" content="Sharan's International Company — Global Solutions" />
+  <meta property="og:description" content="Global. Agile. Trusted. Partner with Sharan's International Company for international expansion and operations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:image" content="https://www.example.com/og-image.jpg" />
+  <link rel="canonical" href="https://www.example.com/" />
+
+  <style>
+    /* ------------------------------
+       Design tokens (easy theming)
+    ------------------------------- */
+    :root {
+      --primary: #2d6ae3;
+      --primary-600: #1f54bd;
+      --primary-700: #1847a5;
+
+      --bg: #ffffff;
+      --bg-soft: #f7f8fb;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e5e7eb;
+
+      --shadow: 0 12px 40px rgba(2, 6, 23, 0.08);
+      --radius: 14px;
+    }
+    html[data-theme="dark"] {
+      --bg: #0b1220;
+      --bg-soft: #0e172a;
+      --text: #e5e7eb;
+      --muted: #98a2b3;
+      --border: #1f2a44;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ------------------------------
+       Base
+    ------------------------------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    body, h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 6px; }
+
+    /* ------------------------------
+       Layout helpers
+    ------------------------------- */
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.2rem; }
+    .section { padding: clamp(3rem, 6vw, 5rem) 0; }
+    .grid { display: grid; gap: 1.25rem; }
+    @media (min-width: 640px) { .grid-sm-2 { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 768px) { .grid-md-3 { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1024px) { .grid-lg-4 { grid-template-columns: repeat(4, 1fr); } }
+
+    /* ------------------------------
+       Buttons
+    ------------------------------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: .5rem; padding: .8rem 1.1rem;
+      border-radius: 12px; font-weight: 600; border: 1px solid transparent;
+      transition: transform .06s ease, background .2s ease, color .2s ease, border-color .2s ease;
+      cursor: pointer; white-space: nowrap;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary {
+      background: var(--primary); color: #fff; box-shadow: var(--shadow);
+    }
+    .btn-primary:hover { background: var(--primary-600); }
+    .btn-outline {
+      background: transparent; color: var(--text); border-color: var(--border);
+    }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ------------------------------
+       Header / Nav
+    ------------------------------- */
+    .header {
+      position: sticky; top: 0; z-index: 40;
+      background: color-mix(in oklab, var(--bg) 82%, transparent);
+      backdrop-filter: saturate(150%) blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .8rem 0;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: .6rem; font-weight: 800; letter-spacing: .2px;
+    }
+    .brand-badge {
+      width: 32px; height: 32px; border-radius: 10px;
+      background: radial-gradient(120% 120% at 10% 10%, #5fb7ff 0%, #2d6ae3 40%, #1847a5 100%);
+      display: grid; place-items: center; color: #fff; font-weight: 800;
+      box-shadow: 0 6px 20px rgba(45, 106, 227, .35);
+      font-size: 14px;
+    }
+    .nav-links { display: none; align-items: center; gap: 1rem; }
+    .nav-links a { padding: .5rem .7rem; border-radius: 10px; color: var(--muted); font-weight: 600; }
+    .nav-links a:hover { color: var(--text); background: var(--bg-soft); }
+    .nav-cta { display: none; align-items: center; gap: .6rem; }
+
+    .hamburger { background: transparent; border: 1px solid var(--border); border-radius: 10px; padding: .6rem .7rem; display: inline-flex; align-items: center; gap: .5rem; }
+    .hamburger svg { width: 20px; height: 20px; }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: .6rem; padding: .8rem; border-top: 1px solid var(--border);
+    }
+    .mobile-menu a { padding: .7rem .8rem; border-radius: 10px; background: var(--bg-soft); color: var(--text); }
+
+    @media (min-width: 900px) {
+      .nav-links { display: flex; }
+      .nav-cta { display: inline-flex; }
+      .hamburger, .mobile-menu { display: none !important; }
+    }
+
+    /* ------------------------------
+       Hero
+    ------------------------------- */
+    .hero {
+      position: relative;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, color-mix(in oklab, var(--primary) 24%, transparent), transparent 60%),
+        radial-gradient(900px 500px at -10% 10%, color-mix(in oklab, #22d3ee 20%, transparent), transparent 60%),
+        linear-gradient(180deg, color-mix(in oklab, var(--bg) 88%, #000 0%), var(--bg) 50%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-wrap {
+      display: grid; gap: 2rem; align-items: center;
+    }
+    @media (min-width: 900px) {
+      .hero-wrap { grid-template-columns: 1.2fr 1fr; gap: 3rem; }
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .35rem .6rem; border-radius: 999px; font-size: .85rem; font-weight: 700;
+      background: var(--bg-soft); color: var(--primary); border: 1px dashed var(--primary);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.6vw, 3.4rem); line-height: 1.1; letter-spacing: .2px;
+    }
+    .hero p.lead {
+      color: var(--muted); font-size: clamp(1rem, 2vw, 1.12rem);
+      margin-top: .9rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.2rem; }
+
+    .hero-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1rem;
+    }
+    .hero-visual {
+      position: relative; isolate: isolate;
+    }
+    .globe {
+      aspect-ratio: 1 / 1; width: 100%; max-width: 520px; margin: 0 auto;
+      background:
+        radial-gradient(closest-side, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%),
+        conic-gradient(from 180deg at 50% 50%, #9bd1ff, #2d6ae3, #1847a5, #22d3ee, #9bd1ff);
+      border-radius: 50%; position: relative; overflow: hidden; border: 10px solid color-mix(in oklab, var(--bg) 70%, transparent);
+    }
+    .globe::after {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(50% 50% at 60% 35%, rgba(255,255,255,.6), rgba(255,255,255,0) 40%);
+      mix-blend-mode: screen;
+    }
+
+    .statbar {
+      display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr);
+      margin-top: 1rem;
+    }
+    .stat {
+      border: 1px solid var(--border); border-radius: 12px; padding: .9rem; background: var(--bg);
+    }
+    .stat b { font-size: 1.35rem; }
+    .stat span { color: var(--muted); font-size: .95rem; }
+
+    /* ------------------------------
+       Cards / Sections
+    ------------------------------- */
+    .section-title { font-size: clamp(1.5rem, 3.2vw, 2.2rem); line-height: 1.2; margin-bottom: .5rem; }
+    .section-sub { color: var(--muted); max-width: 720px; }
+
+    .card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem;
+      transition: transform .08s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: color-mix(in oklab, var(--primary) 30%, var(--border)); }
+    .icon {
+      width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 20px;
+      background: color-mix(in oklab, var(--primary) 16%, var(--bg-soft)); color: var(--primary); margin-bottom: .6rem;
+    }
+    .muted { color: var(--muted); }
+
+    /* ------------------------------
+       Testimonials
+    ------------------------------- */
+    .quote {
+      display: grid; gap: .6rem;
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem;
+    }
+    .quote p { font-style: italic; }
+    .person { display: flex; align-items: center; gap: .7rem; }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--bg-soft); display: grid; place-items: center; font-weight: 800;
+      border: 1px solid var(--border);
+    }
+
+    /* ------------------------------
+       Contact
+    ------------------------------- */
+    .form {
+      display: grid; gap: .9rem;
+    }
+    .input, textarea, select {
+      width: 100%; padding: .8rem .9rem; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); border-radius: 12px;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .input:focus, textarea:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 18%, transparent); outline: none; }
+    textarea { min-height: 140px; resize: vertical; }
+
+    /* ------------------------------
+       Footer
+    ------------------------------- */
+    footer {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--bg) 96%, transparent), var(--bg));
+    }
+    .footer-grid { display: grid; gap: 1.2rem; }
+    @media (min-width: 800px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+    .foot-note { color: var(--muted); font-size: .95rem; }
+
+    /* ------------------------------
+       Misc
+    ------------------------------- */
+    .skip-link {
+      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+    }
+    .skip-link:focus {
+      position: fixed; left: 10px; top: 10px; width: auto; height: auto; padding: .6rem .8rem; background: var(--bg); border: 1px solid var(--primary); border-radius: 10px; z-index: 50;
+    }
+    .center { text-align: center; }
+    .max-w { max-width: 760px; margin-inline: auto; }
+    .badge {
+      display: inline-block; padding: .25rem .5rem; border-radius: 999px;
+      background: var(--bg-soft); border: 1px solid var(--border); color: var(--muted); font-size: .85rem;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Header / Navigation -->
+  <header class="header" role="banner">
+    <div class="container nav" aria-label="Main Navigation">
+      <a class="brand" href="#">
+        <span class="brand-badge" aria-hidden="true">S</span>
+        <span>Sharan's International Company</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#services">Services</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <button id="themeToggle" class="btn btn-outline" aria-label="Toggle theme">🌓 Theme</button>
+        <a href="#contact" class="btn btn-primary">Get a Quote</a>
+      </div>
+
+      <button id="navToggle" class="hamburger" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/></svg>
+        Menu
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="container mobile-menu" hidden>
+      <a href="#about">About</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <div style="display:flex; gap:.6rem; margin-top:.4rem;">
+        <button id="themeToggleMobile" class="btn btn-outline" style="flex:1;">🌓 Theme</button>
+        <a href="#contact" class="btn btn-primary" style="flex:1;">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero section" id="home" role="region" aria-labelledby="hero-title">
+    <div class="container hero-wrap">
+      <div>
+        <span class="eyebrow">🌐 Global. Agile. Trusted.</span>
+        <h1 id="hero-title" style="margin-top:.8rem;">Scale worldwide with Sharan's International Company</h1>
+        <p class="lead">From market entry to logistics and technology enablement, we help ambitious teams expand, operate, and thrive across borders.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Start Your Project</a>
+          <a href="#solutions" class="btn btn-outline">Explore Solutions</a>
+        </div>
+        <div class="hero-card" style="margin-top:1rem;">
+          <div class="statbar">
+            <div class="stat">
+              <b>30+</b><br/><span>Countries Served</span>
+            </div>
+            <div class="stat">
+              <b>250+</b><br/><span>Active Clients</span>
+            </div>
+            <div class="stat">
+              <b>99.9%</b><br/><span>On‑Time Delivery</span>
+            </div>
+            <div class="stat">
+              <b>24/7</b><br/><span>Global Support</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="globe" aria-hidden="true"></div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:.8rem; margin-top:1rem;">
+          <div class="card" style="text-align:center;">
+            <div class="badge">ISO 9001</div>
+            <div class="muted" style="margin-top:.3rem;">Quality Certified</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div class="badge">Trusted by 250+</div>
+            <div class="muted" style="margin-top:.3rem;">Enterprises & SMEs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <main id="main">
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About Sharan's International Company</h2>
+        <p class="section-sub">We partner with organizations to unlock global growth. With on‑ground expertise across regions and a network of trusted partners, we streamline expansion, compliance, and operations so you can focus on value creation.</p>
+      </div>
+    </section>
+
+    <!-- Solutions / Features -->
+    <section id="solutions" class="section" aria-labelledby="solutions-title">
+      <div class="container">
+        <h2 id="solutions-title" class="section-title">Solutions built for international scale</h2>
+        <p class="section-sub">Flexible modules you can adopt independently or as an end‑to‑end operating stack.</p>
+
+        <div class="grid grid-md-3" style="margin-top:1.2rem;">
+          <article class="card">
+            <div class="icon">🚛</div>
+            <h3>Global Logistics</h3>
+            <p class="muted">Door‑to‑door freight, multi‑modal shipping, and last‑mile delivery optimized for speed and cost.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🧭</div>
+            <h3>Market Entry</h3>
+            <p class="muted">Country insights, compliance, and entity setup to launch quickly and mitigate risk.</p>
+          </article>
+          <article class="card">
+            <div class="icon">💡</div>
+            <h3>Strategy & Advisory</h3>
+            <p class="muted">Growth playbooks, partner scouting, and pricing strategies tailored to your expansion goals.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🛡️</div>
+            <h3>Compliance & Legal</h3>
+            <p class="muted">Customs, trade rules, and documentation handled seamlessly across jurisdictions.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🧩</div>
+            <h3>Technology Enablement</h3>
+            <p class="muted">Integrations, automation, and dashboards for visibility, control, and performance.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🤝</div>
+            <h3>Customer Success</h3>
+            <p class="muted">Dedicated managers, SLAs, and 24/7 support to keep your operations running smoothly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section" aria-labelledby="services-title">
+      <div class="container">
+        <h2 id="services-title" class="section-title">Our Services</h2>
+        <p class="section-sub">Pick what you need and scale at your pace.</p>
+
+        <div class="grid grid-lg-4" style="margin-top:1.2rem;">
+          <div class="card">
+            <h3>Freight & Warehousing</h3>
+            <p class="muted">Air, sea, and land freight with bonded and cold‑chain options.</p>
+          </div>
+          <div class="card">
+            <h3>Customs Brokerage</h3>
+            <p class="muted">Documentation, HS classification, duties & tax optimization.</p>
+          </div>
+          <div class="card">
+            <h3>Entity Setup</h3>
+            <p class="muted">Incorporation, local banking, and statutory registrations.</p>
+          </div>
+          <div class="card">
+            <h3>E‑commerce Cross‑Border</h3>
+            <p class="muted">DDP shipping, returns, and marketplace onboarding.</p>
+          </div>
+          <div class="card">
+            <h3>Procurement</h3>
+            <p class="muted">Supplier sourcing, QA, and contract negotiation.</p>
+          </div>
+          <div class="card">
+            <h3>IT & Integrations</h3>
+            <p class="muted">ERP, WMS, TMS, and API integrations with real‑time tracking.</p>
+          </div>
+          <div class="card">
+            <h3>Data & Analytics</h3>
+            <p class="muted">KPIs, forecasting, and performance dashboards.</p>
+          </div>
+          <div class="card">
+            <h3>Dedicated Support</h3>
+            <p class="muted">24/7 helpdesk with multilingual specialists.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <h2 id="testimonials-title" class="section-title">What our partners say</h2>
+        <p class="section-sub">Teams across industries trust us to deliver, every time.</p>
+
+        <div class="grid grid-md-3" style="margin-top:1.2rem;">
+          <figure class="quote">
+            <p>“Sharan’s team helped us enter 5 new markets in under 6 months—while improving margins.”</p>
+            <figcaption class="person">
+              <div class="avatar">A</div>
+              <div>
+                <strong>Anika R.</strong><br />
+                <span class="muted">VP Ops, Retail</span>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“Flawless logistics and visibility. Our on‑time delivery jumped from 93% to 99.9%.”</p>
+            <figcaption class="person">
+              <div class="avatar">M</div>
+              <div>
+                <strong>Michael T.</strong><br />
+                <span class="muted">Head of Supply Chain, Pharma</span>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="quote">
+            <p>“Their compliance guidance saved us weeks of delays and significant duties.”</p>
+            <figcaption class="person">
+              <div class="avatar">S</div>
+              <div>
+                <strong>Sofia K.</strong><br />
+                <span class="muted">Founder, D2C</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" aria-labelledby="cta-title" style="padding: 3.5rem 0;">
+      <div class="container card" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
+        <div>
+          <h2 id="cta-title" class="section-title">Ready to go global?</h2>
+          <p class="muted">Tell us your goals. We’ll map the fastest, safest route to get you there.</p>
+        </div>
+        <div>
+          <a href="#contact" class="btn btn-primary">Talk to an Expert</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title" class="section-title">Contact us</h2>
+        <p class="section-sub max-w">Share a few details and our team will reach out within 1 business day.</p>
+
+        <div class="grid grid-sm-2" style="margin-top:1.2rem;">
+          <form class="card form" action="https://formspree.io/f/your-id" method="POST">
+            <!-- Replace action with your endpoint or use mailto:hello@sharansinternational.com -->
+            <div class="grid grid-sm-2">
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" class="input" type="text" placeholder="Jane Doe" required />
+              </div>
+              <div>
+                <label for="email">Work email</label>
+                <input id="email" name="email" class="input" type="email" placeholder="jane@company.com" required />
+              </div>
+            </div>
+
+            <div class="grid grid-sm-2">
+              <div>
+                <label for="company">Company</label>
+                <input id="company" name="company" class="input" type="text" placeholder="Acme Inc." />
+              </div>
+              <div>
+                <label for="country">Country</label>
+                <input id="country" name="country" class="input" type="text" placeholder="Singapore" />
+              </div>
+            </div>
+
+            <div>
+              <label for="service">Interested in</label>
+              <select id="service" name="service" class="input">
+                <option>Global Logistics</option>
+                <option>Market Entry</option>
+                <option>Compliance</option>
+                <option>Technology</option>
+                <option>Advisory</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message">Your message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your goals..."></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Send message</button>
+            <span class="muted" style="font-size:.9rem;">Or email us at <a href="mailto:hello@sharansinternational.com">hello@sharansinternational.com</a></span>
+          </form>
+
+          <div class="card" style="display:grid; gap:.8rem;">
+            <h3>Contact details</h3>
+            <div class="muted">Email: <a href="mailto:hello@sharansinternational.com">hello@sharansinternational.com</a></div>
+            <div class="muted">Sales: <a href="mailto:sales@sharansinternational.com">sales@sharansinternational.com</a></div>
+            <div class="muted">Phone: <a href="tel:+10000000000">+1 (000) 000‑0000</a></div>
+            <div class="muted">HQ: 123 International Blvd, Singapore</div>
+            <hr style="border:0; border-top:1px solid var(--border);" />
+            <h3>FAQs</h3>
+            <details>
+              <summary>How quickly can we start?</summary>
+              <p class="muted">Typical kickoff within 5–7 business days after scoping and paperwork.</p>
+            </details>
+            <details>
+              <summary>Which regions do you cover?</summary>
+              <p class="muted">APAC, EMEA, and the Americas with localized partners and support.</p>
+            </details>
+            <details>
+              <summary>Do you support custom integrations?</summary>
+              <p class="muted">Yes—our team integrates with major ERPs, WMS/TMS, and custom APIs.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="container section" style="padding:2.2rem 0;">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#">
+            <span class="brand-badge" aria-hidden="true">S</span>
+            <span>Sharan's International</span>
+          </a>
+          <p class="foot-note" style="margin-top:.6rem;">Global solutions for modern businesses.</p>
+          <div style="display:flex; gap:.5rem; margin-top:.6rem;">
+            <a class="btn btn-outline" href="#" aria-label="LinkedIn">in</a>
+            <a class="btn btn-outline" href="#" aria-label="Twitter">𝕏</a>
+            <a class="btn btn-outline" href="mailto:hello@sharansinternational.com" aria-label="Email">✉️</a>
+          </div>
+        </div>
+        <div>
+          <strong>Company</strong>
+          <ul style="list-style:none; padding:0; margin:.6rem 0 0 0; display:grid; gap:.3rem;">
+            <li><a class="muted" href="#about">About</a></li>
+            <li><a class="muted" href="#services">Services</a></li>
+            <li><a class="muted" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <strong>Resources</strong>
+          <ul style="list-style:none; padding:0; margin:.6rem 0 0 0; display:grid; gap:.3rem;">
+            <li><a class="muted" href="#">Case Studies</a></li>
+            <li><a class="muted" href="#">Blog</a></li>
+            <li><a class="muted" href="#">Help Center</a></li>
+          </ul>
+        </div>
+        <div>
+          <strong>Legal</strong>
+          <ul style="list-style:none; padding:0; margin:.6rem 0 0 0; display:grid; gap:.3rem;">
+            <li><a class="muted" href="#">Privacy</a></li>
+            <li><a class="muted" href="#">Terms</a></li>
+            <li><a class="muted" href="#">Compliance</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:.8rem; margin-top:1.2rem;">
+        <span class="foot-note">© <span id="year"></span> Sharan's International Company. All rights reserved.</span>
+        <span class="badge">ISO 9001 • SOC 2</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    navToggle?.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.hidden = expanded;
+      if (!expanded) {
+        // close when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            navToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.hidden = true;
+          }, { once: true });
+        });
+      }
+    });
+
+    // Theme toggle with localStorage
+    const setTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      try { localStorage.setItem('theme', theme); } catch(e){}
+    };
+    const getStoredTheme = () => {
+      try { return localStorage.getItem('theme'); } catch(e){ return null; }
+    };
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const saved = getStoredTheme();
+    setTheme(saved || (prefersDark ? 'dark' : 'light'));
+
+    const themeButtons = [document.getElementById('themeToggle'), document.getElementById('themeToggleMobile')].filter(Boolean);
+    themeButtons.forEach(btn => btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    }));
+
+    // Smooth scroll for same-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          const el = document.querySelector(id);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, '', id);
+          }
+        }
+      });
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
